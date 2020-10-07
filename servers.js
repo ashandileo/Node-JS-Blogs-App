@@ -1,8 +1,13 @@
 const http = require('http')
 
 const server = http.createServer((req, res) => {
-  console.log("req", req)
-  console.log('request made')
+  // set header content type
+  res.setHeader('Content-Type', 'text/html')
+
+  res.write('<head><title>Hello World in node js</title></head>')
+  res.write('<p>Hello World!</p>')
+  res.write('<p>Hello World! again</p>')
+  res.end()
 })
 
 // port number, hostname
