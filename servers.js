@@ -1,13 +1,20 @@
 const http = require('http')
+const fs = require('fs')
 
 const server = http.createServer((req, res) => {
   // set header content type
   res.setHeader('Content-Type', 'text/html')
 
-  res.write('<head><title>Hello World in node js</title></head>')
-  res.write('<p>Hello World!</p>')
-  res.write('<p>Hello World! again</p>')
-  res.end()
+  // send an html file
+  fs.readFile('./views/index.html', (err, data) => {
+    if (err) {
+      console.log("err", err)
+      return res.end()
+    }
+    
+    // res.write(data)
+    res.end(data)
+  })
 })
 
 // port number, hostname
