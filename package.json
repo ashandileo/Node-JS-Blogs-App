@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ashandileo/nodejs-beginner#readme",
   "dependencies": {
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "lodash": "^4.17.20"
   }
