@@ -22,57 +22,24 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(morgan('dev'))
 
-// mongoose
-app.get('/add-blog', (req, res) => {
-  const blog = new Blog({
-    title: 'new blog 2',
-    snippet: 'about my new blog',
-    body: 'more about my new blog',
-    test: 'lalala'
-  })
-
-  blog.save()
-  .then(result => {
-    res.send(result)
-  })
-  .catch(err => {
-    console.log(err)
-  })
-})
-
-app.get('/all-blogs', (req, res) => {
-  Blog.find()
-    .then(result => {
-      res.send(result)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-})
-
-app.get('/single-blog', (req, res) => {
-  Blog.findById('5f82d90d30a8147367622d7d')
-    .then(result => {
-      res.send(result)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-})
-
 // routes
 app.get('/', (req, res) => {
-  const blogs = [
-      { title: 'lorem 1', snippet: 'lorem lorem lorem lorem' },
-      { title: 'lorem 2', snippet: 'lorem lorem lorem lorem' },
-      { title: 'lorem 3', snippet: 'lorem lorem lorem lorem' }
-  ]
-
-  res.render('index', { title: 'Home', blogs })
+  res.redirect('/blogs')
 })
 
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About' })
+})
+
+// blogs route
+app.get('/blogs', (req, res) => {
+  Blog.find().sort({ createdAt: -1 })
+    .then(result => {
+      res.render('index', { title: 'All Blogs', blogs: result })
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 app.get('/blogs/create', (req, res) => {
