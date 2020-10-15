@@ -10,13 +10,17 @@
     <div class="content">
       <p><%= blog.body %></p>
     </div>
-    <a class="delete" data-doc="<%= blog._id %>">delete</a>
+    <img
+      class="delete"
+      data-doc="<%= blog._id %>"
+      src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png"
+    />
   </div>
 
   <%- include('../partials/footer.ejs')  %>
   
   <script>
-    const trashcan = document.querySelector('a.delete')
+    const trashcan = document.querySelector('img.delete')
 
     trashcan.addEventListener('click', () => {
       console.log('click')
